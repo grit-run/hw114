@@ -1,23 +1,19 @@
 package jm.task.core.jdbc.util;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class Util {
 
-    public static String dbUrl = "jdbc:mysql://192.168.89.21:3306/firstdb";
-    public static String dbUsername = "root";
-    public static String dbPassword = "root";
+    private static final String dbUrl = "jdbc:mysql://192.168.89.21:3306/firstdb";
+    private static final String dbUsername = "root";
+    private static final String dbPassword = "root";
     // реализуйте настройку соеденения с БД
-    private static Connection connection;
+    //private static Connection connection;
     public static Connection getConnection() {
 
-        Connection connection = null;
+        Connection connection;
 
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
@@ -26,5 +22,24 @@ public class Util {
             throw new RuntimeException("Database properties file not available or no connection ", e);
         }
         return connection;
+    }
+
+//    public static void closeNoWarnings(Connection conn) throws SQLException {
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//                // Ignore
+//            }
+//        }
+//    }
+    public static void setRollback (Connection conn) {
+        try {
+            if (conn != null) {
+                conn.rollback();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
