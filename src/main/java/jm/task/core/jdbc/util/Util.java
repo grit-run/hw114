@@ -9,8 +9,6 @@ public class Util {
     private static final String dbUrl = "jdbc:mysql://192.168.89.21:3306/firstdb";
     private static final String dbUsername = "root";
     private static final String dbPassword = "root";
-    // реализуйте настройку соеденения с БД
-    //private static Connection connection;
     public static Connection getConnection() {
 
         Connection connection;
@@ -24,15 +22,6 @@ public class Util {
         return connection;
     }
 
-//    public static void closeNoWarnings(Connection conn) throws SQLException {
-//        if (conn != null) {
-//            try {
-//                conn.close();
-//            } catch (SQLException e) {
-//                // Ignore
-//            }
-//        }
-//    }
     public static void setRollback (Connection conn) {
         try {
             if (conn != null) {
